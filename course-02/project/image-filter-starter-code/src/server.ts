@@ -22,22 +22,22 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   app.get('/filteredimage/', async ( req: Request, res: Response) => {
     //    1. validate the image_url query
-    let { image_url } = req.query;
+    let {image_url}  = req.query;
     if (!image_url) {
       return res.status(400).send("Image url is required")
     }
     //    2. call filterImageFromURL(image_url) to filter the image
     const result = await filterImageFromURL(image_url);
     //    3. send the resulting file in the response
-    try {
-      return res.status(200).sendFile(result, await deleteLocalFiles([result]));
     //    4. deletes any files on the server on finish of the response
-      
-    }
-    catch (e) {
-      return res.status(422).send(e)
-    }
-    
+   try {
+    return res.status(200).sendFile(result, async () => {
+      return await deleteLocalFiles([result]);
+    });
+   }
+   catch (e) {
+    return res.status(422).send(e);
+   }
     
   });
   
