@@ -1,4 +1,4 @@
-Endpoint URl = http://udagramproject-kolade-dev.us-east-1.elasticbeanstalk.com/
+Endpint URL = http://udagramproject-kolade-dev.us-east-1.elasticbeanstalk.com/
 
 # Udagram Image Filtering Microservice
 
